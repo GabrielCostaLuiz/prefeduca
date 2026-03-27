@@ -28,21 +28,18 @@ export const useStudentStore = create<StudentState>()(
         set({ isLoading: true, error: null });
         try {
           const data = await studentRepository.fetchByClass(classId);
-          set((state) => {
-            const merged = [...data];
-            state.students.forEach((local) => {
-              if (
-                local.classId === classId &&
-                !merged.find((s) => s.id === local.id)
-              ) {
-                merged.push(local);
-              } else if (local.classId !== classId) {
-                merged.push(local);
-              }
-            });
-            return { students: merged };
-          });
-        } catch (error) {
+      set((state) => {
+        const merged = [...data];
+        state.students.forEach(local => {
+          if (local.classId === classId && !merged.find(s => s.id === local.id)) {
+            merged.push(local);
+          } else if (local.classId !== classId) {
+            merged.push(local);
+          }
+        });
+        return { students: merged };
+      });
+        } catch (error: unknown) {
           set({ error: (error as Error).message || 'Erro ao carregar alunos' });
         } finally {
           set({ isLoading: false });
@@ -61,7 +58,7 @@ export const useStudentStore = create<StudentState>()(
 
       deleteStudent: async (id) => {
         try {
-          const student = get().students.find((s) => s.id === id);
+          const student = get().students.find(s => s.id === id);
           await studentRepository.delete(id);
           set((state) => ({
             students: state.students.filter((s) => s.id !== id),
@@ -88,6 +85,6 @@ export const useStudentStore = create<StudentState>()(
     {
       name: 'prefeduca-students',
       storage: createJSONStorage(() => AsyncStorage),
-    },
-  ),
+    }
+  )
 );

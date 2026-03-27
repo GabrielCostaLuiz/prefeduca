@@ -1,5 +1,4 @@
 import { Box } from '@/components/ui/box';
-import { useClassStore } from '../class.store';
 import { Class } from '../class.types';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import {
@@ -40,6 +39,8 @@ import {
 import { HStack } from '@/components/ui/hstack';
 import { VStack } from '@/components/ui/vstack';
 import { Button, ButtonIcon } from '@/components/ui/button';
+import { useClassStore } from '../class.store';
+import { useStudentStore } from '../../students/student.store';
 
 export function ClassListScreen() {
   const {
@@ -52,6 +53,7 @@ export function ClassListScreen() {
     deleteClass,
   } = useClassStore();
   const { schools, fetchSchools } = useSchoolStore();
+  const { students } = useStudentStore();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSchoolId, setSelectedSchoolId] = useState<string>('all');
@@ -72,7 +74,10 @@ export function ClassListScreen() {
   );
 
   const filteredClasses = useMemo(() => {
-    let result = classes;
+    let result = classes.map((c: Class) => ({
+      ...c,
+      studentsCount: students.filter(s => s.classId === c.id).length
+    }));
 
     if (searchQuery) {
       const lowerQuery = searchQuery.toLowerCase();
@@ -92,13 +97,12 @@ export function ClassListScreen() {
     }
 
     return result;
-  }, [classes, searchQuery, selectedSchoolId, selectedShift]);
+  }, [classes, students, searchQuery, selectedSchoolId, selectedShift]);
 
   const handleCreateOrUpdateClass = async (data: ClassFormValues) => {
     setIsSubmitting(true);
     if (editingClass) {
-      const { schoolId, ...updateData } = data;
-      await updateClass(editingClass.id, updateData);
+      await updateClass(editingClass.id, data);
     } else {
       await addClass(data.schoolId, data);
     }

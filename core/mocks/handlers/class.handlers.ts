@@ -4,6 +4,7 @@ import { API_URL } from './constants';
 
 export const classHandlers = [
   http.get(`${API_URL}/classes`, () => {
+    recalculateStudentCounts();
     const classesWithSchool = db.classes.map((c) => {
       const school = db.schools.find((s) => s.id === c.schoolId);
       return { ...c, schoolName: school?.name };
@@ -12,6 +13,7 @@ export const classHandlers = [
   }),
 
   http.get(`${API_URL}/schools/:schoolId/classes`, ({ params }) => {
+    recalculateStudentCounts();
     const { schoolId } = params;
     const school = db.schools.find((s) => s.id === schoolId);
     const classes = db.classes
@@ -32,8 +34,10 @@ export const classHandlers = [
         studentsCount: 0,
       };
       db.classes.push(classWithId);
+      const school = db.schools.find((s) => s.id === (schoolId || classWithId.schoolId));
+      const responseBody = { ...classWithId, schoolName: school?.name };
       recalculateClassCounts();
-      return HttpResponse.json(classWithId, { status: 201 });
+      return HttpResponse.json(responseBody, { status: 201 });
     },
   ),
 
@@ -43,7 +47,11 @@ export const classHandlers = [
     const index = db.classes.findIndex((c) => c.id === id);
     if (index > -1) {
       db.classes[index] = { ...db.classes[index], ...updatedData };
-      return HttpResponse.json(db.classes[index]);
+      const school = db.schools.find((s) => s.id === db.classes[index].schoolId);
+      const responseBody = { ...db.classes[index], schoolName: school?.name };
+      recalculateClassCounts();
+      recalculateStudentCounts();
+      return HttpResponse.json(responseBody);
     }
     return new HttpResponse(null, { status: 404 });
   }),

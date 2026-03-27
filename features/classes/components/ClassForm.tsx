@@ -1,4 +1,3 @@
-import { Box } from '@/components/ui/box';
 import { Button, ButtonText, ButtonSpinner } from '@/components/ui/button';
 import {
   FormControl,
@@ -132,7 +131,7 @@ export function ClassForm({
           render={({ field: { onChange, value } }) => (
             <Select onValueChange={onChange} selectedValue={value}>
               <SelectTrigger variant="outline" size="md">
-                <SelectInput placeholder="Selecione o turno" />
+                <SelectInput placeholder="Selecione o turno" value={value} />
                 <SelectIcon className="mr-3" as={ChevronDownIcon} />
               </SelectTrigger>
               <SelectPortal>
@@ -192,7 +191,10 @@ export function ClassForm({
             render={({ field: { onChange, value } }) => (
               <Select onValueChange={onChange} selectedValue={value}>
                 <SelectTrigger variant="outline" size="md">
-                  <SelectInput placeholder="Selecione a unidade" />
+                  <SelectInput 
+                    placeholder="Selecione a unidade" 
+                    value={schools.find((s) => s.id === value)?.name}
+                  />
                   <SelectIcon className="mr-3" as={ChevronDownIcon} />
                 </SelectTrigger>
                 <SelectPortal>

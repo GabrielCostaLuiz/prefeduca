@@ -1,5 +1,6 @@
 import { Box } from '@/components/ui/box';
 import { useSchoolStore } from '../school.store';
+import { useClassStore } from '../../classes/class.store';
 import { School } from '../school.types';
 import { SchoolCard } from '../components/SchoolCard';
 import { SchoolForm } from '../components/SchoolForm';
@@ -52,6 +53,7 @@ export function SchoolListScreen() {
     deleteSchool,
     updateSchool,
   } = useSchoolStore();
+  const { classes } = useClassStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState<SortOrder>('name-asc');
 
@@ -64,7 +66,10 @@ export function SchoolListScreen() {
   }, [fetchSchools]);
 
   const processedSchools = useMemo(() => {
-    let result = [...schools];
+    let result = schools.map(s => ({
+      ...s,
+      classCount: classes.filter(c => c.schoolId === s.id).length
+    }));
 
     if (searchQuery) {
       const lowerQuery = searchQuery.toLowerCase();
@@ -75,7 +80,6 @@ export function SchoolListScreen() {
       );
     }
 
-    // Sort
     result.sort((a, b) => {
       if (sortOrder === 'name-asc') return a.name.localeCompare(b.name);
       if (sortOrder === 'name-desc') return b.name.localeCompare(a.name);
@@ -83,9 +87,8 @@ export function SchoolListScreen() {
       if (sortOrder === 'classes-asc') return a.classCount - b.classCount;
       return 0;
     });
-
     return result;
-  }, [schools, searchQuery, sortOrder]);
+  }, [schools, searchQuery, sortOrder, classes]);
 
   const handleCreateSchool = async (
     data: Omit<School, 'id' | 'classCount'>,

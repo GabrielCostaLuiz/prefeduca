@@ -4,6 +4,7 @@ import { API_URL } from './constants';
 
 export const schoolHandlers = [
   http.get(`${API_URL}/schools`, () => {
+    recalculateClassCounts();
     return HttpResponse.json(db.schools);
   }),
 
@@ -25,6 +26,7 @@ export const schoolHandlers = [
     const index = db.schools.findIndex((s) => s.id === id);
     if (index > -1) {
       db.schools[index] = { ...db.schools[index], ...body };
+      recalculateClassCounts();
       return HttpResponse.json(db.schools[index]);
     }
     return new HttpResponse(null, { status: 404 });

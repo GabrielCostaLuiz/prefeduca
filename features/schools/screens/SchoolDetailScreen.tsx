@@ -9,6 +9,7 @@ import { CreateSchoolDTO } from '../school.types';
 import { useSchoolStore } from '../school.store';
 import { SchoolForm } from '../components/SchoolForm';
 import { useClassStore } from '../../classes/class.store';
+import { useStudentStore } from '../../students/student.store';
 import { ClassForm, ClassFormValues } from '../../classes/components/ClassForm';
 import { ClassCard } from '../../classes/components/ClassCard';
 import { Class } from '../../classes/class.types';
@@ -41,6 +42,7 @@ export function SchoolDetailScreen() {
     deleteClass,
     updateClass,
   } = useClassStore();
+  const { students } = useStudentStore();
   const school = getSchool(id as string);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,14 +59,18 @@ export function SchoolDetailScreen() {
   }, [id, fetchClasses, fetchSchools]);
 
   const filteredClasses = useMemo(() => {
-    if (!searchQuery) return classes;
+    const schoolClasses = classes.map((c: Class) => ({
+      ...c,
+      studentsCount: students.filter(s => s.classId === c.id).length
+    })).filter((c: Class) => c.schoolId === id);
+    if (!searchQuery) return schoolClasses;
     const lowerQuery = searchQuery.toLowerCase();
-    return classes.filter(
+    return schoolClasses.filter(
       (c: Class) =>
         c.name.toLowerCase().includes(lowerQuery) ||
         c.room.toLowerCase().includes(lowerQuery),
     );
-  }, [classes, searchQuery]);
+  }, [classes, students, searchQuery, id]);
 
   if (!school)
     return (
@@ -101,8 +107,7 @@ export function SchoolDetailScreen() {
   const handleCreateOrUpdateClass = async (data: ClassFormValues) => {
     setIsSubmitting(true);
     if (editingClass) {
-      const { schoolId, ...updateData } = data;
-      await updateClass(editingClass.id, updateData);
+      await updateClass(editingClass.id, data);
     } else {
       await addClass(id as string, data);
     }
@@ -166,10 +171,10 @@ export function SchoolDetailScreen() {
             </Box>
             <HStack space="md" className="mt-4">
               {[
-                { title: 'Total de Turmas', value: classes.length },
+                { title: 'Total de Turmas', value: filteredClasses.length },
                 {
                   title: 'Total de Alunos',
-                  value: classes.reduce(
+                  value: filteredClasses.reduce(
                     (acc: number, c: Class) => acc + c.studentsCount,
                     0,
                   ),

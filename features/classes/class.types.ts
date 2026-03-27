@@ -17,4 +17,4 @@ export type UpdateClassWithSchoolDTO = Omit<
   Class,
   'id' | 'studentsCount' | 'schoolName'
 >;
-export type UpdateClassDTO = Partial<CreateClassDTO>;
+export type UpdateClassDTO = Partial<Omit<Class, 'id' | 'studentsCount' | 'schoolName'>>;
