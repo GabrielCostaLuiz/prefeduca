@@ -12,11 +12,11 @@ interface ListHeaderProps {
   actionIcon?: LucideIcon;
 }
 
-export function ListHeader({ 
-  title, 
-  subtitle, 
-  onActionPress, 
-  actionIcon 
+export function ListHeader({
+  title,
+  subtitle,
+  onActionPress,
+  actionIcon,
 }: ListHeaderProps) {
   return (
     <HStack className="justify-between items-center">

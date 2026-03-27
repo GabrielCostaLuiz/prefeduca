@@ -11,12 +11,21 @@ interface StudentListProps {
   searchQuery: string;
 }
 
-export const StudentList = ({ data, onEdit, onDelete, searchQuery }: StudentListProps) => {
+export const StudentList = ({
+  data,
+  onEdit,
+  onDelete,
+  searchQuery,
+}: StudentListProps) => {
   if (data.length === 0) {
     return (
       <EmptyState
         icon={User}
-        message={searchQuery ? "Nenhum aluno encontrado para esta busca." : "Nenhum aluno cadastrado nesta turma."}
+        message={
+          searchQuery
+            ? 'Nenhum aluno encontrado para esta busca.'
+            : 'Nenhum aluno cadastrado nesta turma.'
+        }
       />
     );
   }
@@ -24,11 +33,11 @@ export const StudentList = ({ data, onEdit, onDelete, searchQuery }: StudentList
   return (
     <Box className="mt-2">
       {data.map((item) => (
-        <StudentCard 
-          key={item.id} 
-          item={item} 
-          onEdit={onEdit} 
-          onDelete={onDelete} 
+        <StudentCard
+          key={item.id}
+          item={item}
+          onEdit={onEdit}
+          onDelete={onDelete}
         />
       ))}
     </Box>

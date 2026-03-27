@@ -9,12 +9,17 @@ interface SearchInputProps {
   className?: string;
 }
 
-export function SearchInput({ placeholder, value, onChangeText, className = "" }: SearchInputProps) {
+export function SearchInput({
+  placeholder,
+  value,
+  onChangeText,
+  className = '',
+}: SearchInputProps) {
   return (
     <Box className={`my-4 ${className}`}>
-      <Input 
-        variant="outline" 
-        size="md" 
+      <Input
+        variant="outline"
+        size="md"
         className="rounded-2xl border-outline-100 bg-white items-center shadow-sm h-12"
       >
         <InputSlot className="pl-4">

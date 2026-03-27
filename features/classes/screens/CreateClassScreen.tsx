@@ -26,7 +26,9 @@ export function CreateClassScreen() {
       >
         <ScrollView>
           <Box className="p-6">
-            <Heading size="xl" className="mb-2 text-secondary-900">Cadastrar Nova Turma</Heading>
+            <Heading size="xl" className="mb-2 text-secondary-900">
+              Cadastrar Nova Turma
+            </Heading>
             <ClassForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />
           </Box>
         </ScrollView>

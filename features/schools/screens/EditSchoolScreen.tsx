@@ -3,7 +3,12 @@ import { Heading } from '@/components/ui/heading';
 import { SchoolForm } from '../components/SchoolForm';
 import { useLocalSearchParams, router } from 'expo-router';
 import { useState } from 'react';
-import { ScrollView, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
+import {
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import { useSchoolStore } from '../school.store';
 
 export function EditSchoolScreen() {
@@ -29,8 +34,14 @@ export function EditSchoolScreen() {
       >
         <ScrollView>
           <Box className="p-6">
-            <Heading size="xl" className="mb-2 text-secondary-900">Editar Escola</Heading>
-            <SchoolForm initialData={school} onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+            <Heading size="xl" className="mb-2 text-secondary-900">
+              Editar Escola
+            </Heading>
+            <SchoolForm
+              initialData={school}
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+            />
           </Box>
         </ScrollView>
       </KeyboardAvoidingView>

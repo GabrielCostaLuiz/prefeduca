@@ -8,11 +8,11 @@ export const schoolHandlers = [
   }),
 
   http.post(`${API_URL}/schools`, async ({ request }) => {
-    const newSchool = await request.json() as any;
-    const schoolWithId = { 
-      ...newSchool, 
-      id: Math.random().toString(36).substr(2, 9), 
-      classCount: 0 
+    const newSchool = (await request.json()) as any;
+    const schoolWithId = {
+      ...newSchool,
+      id: Math.random().toString(36).substr(2, 9),
+      classCount: 0,
     };
     db.schools.push(schoolWithId);
     recalculateClassCounts();
@@ -21,7 +21,7 @@ export const schoolHandlers = [
 
   http.put(`${API_URL}/schools/:id`, async ({ request, params }) => {
     const { id } = params;
-    const body = await request.json() as any;
+    const body = (await request.json()) as any;
     const index = db.schools.findIndex((s) => s.id === id);
     if (index > -1) {
       db.schools[index] = { ...db.schools[index], ...body };

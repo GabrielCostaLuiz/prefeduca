@@ -20,12 +20,19 @@ export const db: MockDB = {
 
 export const recalculateClassCounts = () => {
   db.schools.forEach((school) => {
-    school.classCount = db.classes.filter((c) => c.schoolId === school.id).length;
+    school.classCount = db.classes.filter(
+      (c) => c.schoolId === school.id,
+    ).length;
   });
 };
 
 export const recalculateStudentCounts = () => {
   db.classes.forEach((clazz) => {
-    clazz.studentsCount = db.students.filter((s) => s.classId === clazz.id).length;
+    clazz.studentsCount = db.students.filter(
+      (s) => s.classId === clazz.id,
+    ).length;
   });
 };
+
+recalculateClassCounts();
+recalculateStudentCounts();

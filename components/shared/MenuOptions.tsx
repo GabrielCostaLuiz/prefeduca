@@ -19,12 +19,12 @@ interface MenuOptionsProps {
   offset?: number;
 }
 
-export const MenuOptions = ({ 
-  options, 
-  triggerClassName = "text-secondary-900", 
-  buttonClassName = "",
-  iconSize = 24, 
-  offset = 8 
+export const MenuOptions = ({
+  options,
+  triggerClassName = 'text-secondary-900',
+  buttonClassName = '',
+  iconSize = 24,
+  offset = 8,
 }: MenuOptionsProps) => {
   return (
     <Menu
@@ -36,19 +36,21 @@ export const MenuOptions = ({
       )}
     >
       {options.map((option) => (
-        <MenuItem 
-          key={option.key} 
+        <MenuItem
+          key={option.key}
           textValue={option.title}
           onPress={option.action}
         >
-          <ButtonIcon 
-            as={option.icon} 
-            className={`mr-2 ${option.isDestructive ? "text-error-500" : "text-typography-500"}`} 
-            size="sm" 
+          <ButtonIcon
+            as={option.icon}
+            className={`mr-2 ${option.isDestructive ? 'text-error-500' : 'text-typography-500'}`}
+            size="sm"
           />
-          <MenuItemLabel 
-            size="sm" 
-            className={option.isDestructive ? "text-error-500" : "text-typography-700"}
+          <MenuItemLabel
+            size="sm"
+            className={
+              option.isDestructive ? 'text-error-500' : 'text-typography-700'
+            }
           >
             {option.title}
           </MenuItemLabel>

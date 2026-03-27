@@ -3,14 +3,19 @@ import { Heading } from '@/components/ui/heading';
 import { ClassForm } from '../components/ClassForm';
 import { useLocalSearchParams, router } from 'expo-router';
 import { useState } from 'react';
-import { ScrollView, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
+import {
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import { useClassStore } from '../class.store';
 
 export function EditClassScreen() {
   const { classId } = useLocalSearchParams();
   const { getClass, updateClass } = useClassStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const clazz = getClass(classId as string);
 
   if (!clazz) return <ActivityIndicator />;
@@ -30,8 +35,14 @@ export function EditClassScreen() {
       >
         <ScrollView>
           <Box className="p-6">
-            <Heading size="xl" className="mb-2 text-secondary-900">Editar Turma</Heading>
-            <ClassForm initialData={clazz} onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+            <Heading size="xl" className="mb-2 text-secondary-900">
+              Editar Turma
+            </Heading>
+            <ClassForm
+              initialData={clazz}
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+            />
           </Box>
         </ScrollView>
       </KeyboardAvoidingView>

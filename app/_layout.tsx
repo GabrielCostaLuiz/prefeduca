@@ -5,7 +5,7 @@ import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
-import {  Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export {
@@ -74,7 +74,7 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-        <RootLayoutNav />
+      <RootLayoutNav />
     </SafeAreaProvider>
   );
 }
@@ -84,7 +84,7 @@ function RootLayoutNav() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: '#1e40af', 
+      primary: '#1e40af',
       background: '#f9fafb',
     },
   };
@@ -100,7 +100,6 @@ function RootLayoutNav() {
         >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
-
       </ThemeProvider>
     </GluestackUIProvider>
   );

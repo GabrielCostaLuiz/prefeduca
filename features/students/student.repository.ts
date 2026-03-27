@@ -16,7 +16,10 @@ export class HttpStudentRepository implements StudentRepository {
   }
 
   async create(classId: string, data: CreateStudentDTO): Promise<Student> {
-    return await this.client.post<Student>(`/classes/${classId}/students`, data);
+    return await this.client.post<Student>(
+      `/classes/${classId}/students`,
+      data,
+    );
   }
 
   async delete(id: string): Promise<void> {

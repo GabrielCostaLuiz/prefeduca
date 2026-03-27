@@ -16,27 +16,30 @@ export const classHandlers = [
     const school = db.schools.find((s) => s.id === schoolId);
     const classes = db.classes
       .filter((c) => c.schoolId === schoolId)
-      .map(c => ({ ...c, schoolName: school?.name }));
+      .map((c) => ({ ...c, schoolName: school?.name }));
     return HttpResponse.json(classes);
   }),
 
-  http.post(`${API_URL}/schools/:schoolId/classes`, async ({ request, params }) => {
-    const { schoolId } = params;
-    const body = await request.json() as any;
-    const classWithId = { 
-      ...body, 
-      id: Math.random().toString(36).substr(2, 9), 
-      schoolId: schoolId as string, 
-      studentsCount: 0 
-    };
-    db.classes.push(classWithId);
-    recalculateClassCounts();
-    return HttpResponse.json(classWithId, { status: 201 });
-  }),
+  http.post(
+    `${API_URL}/schools/:schoolId/classes`,
+    async ({ request, params }) => {
+      const { schoolId } = params;
+      const body = (await request.json()) as any;
+      const classWithId = {
+        ...body,
+        id: Math.random().toString(36).substr(2, 9),
+        schoolId: schoolId as string,
+        studentsCount: 0,
+      };
+      db.classes.push(classWithId);
+      recalculateClassCounts();
+      return HttpResponse.json(classWithId, { status: 201 });
+    },
+  ),
 
   http.put(`${API_URL}/classes/:id`, async ({ request, params }) => {
     const { id } = params;
-    const updatedData = await request.json() as any;
+    const updatedData = (await request.json()) as any;
     const index = db.classes.findIndex((c) => c.id === id);
     if (index > -1) {
       db.classes[index] = { ...db.classes[index], ...updatedData };

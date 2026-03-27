@@ -95,15 +95,15 @@ O projeto utiliza **Mock Service Worker (MSW)** para simular o ambiente de produ
 
 ### Endpoints principais
 
-| Método | Endpoint                     | Descrição                                 |
-| ------ | ---------------------------- | ----------------------------------------- |
-| GET    | `/schools`                   | Lista todas as unidades escolares         |
-| POST   | `/schools`                   | Cadastra uma nova escola                  |
-| GET    | `/schools/:id/classes`       | Lista as turmas de uma unidade específica |
-| POST   | `/schools/:id/classes`       | Cria uma nova turma para a escola         |
-| GET    | `/classes/:id/students`      | Lista os alunos de uma turma              |
-| POST   | `/classes/:id/students`      | Matricula um novo aluno na turma          |
-| DELETE | `/students/:id`              | Remove um registro de aluno               |
+| Método | Endpoint                | Descrição                                 |
+| ------ | ----------------------- | ----------------------------------------- |
+| GET    | `/schools`              | Lista todas as unidades escolares         |
+| POST   | `/schools`              | Cadastra uma nova escola                  |
+| GET    | `/schools/:id/classes`  | Lista as turmas de uma unidade específica |
+| POST   | `/schools/:id/classes`  | Cria uma nova turma para a escola         |
+| GET    | `/classes/:id/students` | Lista os alunos de uma turma              |
+| POST   | `/classes/:id/students` | Matricula um novo aluno na turma          |
+| DELETE | `/students/:id`         | Remove um registro de aluno               |
 
 ---
 
@@ -159,16 +159,19 @@ Diferente da estrutura tradicional, adotamos o modelo **Flattened Feature**, ond
 ## Funcionalidades Principais
 
 ### Gestão de Unidades Escolares
+
 - Visualização de todas as escolas da rede.
 - Indicadores rápidos: total de turmas e alunos por unidade.
 - Busca por nome ou endereço.
 
 ### Controle de Turmas
+
 - Organização por salas e turnos.
 - Listagem global ou filtrada por escola.
 - Sincronização em tempo real do total de matrículas.
 
 ### Gestão de Alunos
+
 - Cadastro rápido com geração automática de **número de chamada**.
 - Listagem detalhada dos alunos com busca instantânea.
 - Gestão de movimentação (transferências/saídas).
@@ -178,6 +181,7 @@ Diferente da estrutura tradicional, adotamos o modelo **Flattened Feature**, ond
 ## Design System
 
 O app utiliza **Gluestack UI v2** e **NativeWind**, seguindo uma paleta de cores institucional vibrante, com foco em:
+
 - **Acessibilidade:** Fontes legíveis e alto contraste.
 - **Feedback Visual:** Uso de Skeletons, Empty States e Error States padronizados.
 - **Modernidade:** Sombras suaves (`shadow-soft-4`) e cantos arredondados (`rounded-xl`).

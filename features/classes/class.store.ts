@@ -31,19 +31,22 @@ export const useClassStore = create<ClassState>()(
         set({ isLoading: true, error: null });
         try {
           const data = await classRepository.fetchBySchool(schoolId);
-      set((state) => {
-        const merged = [...data];
-        state.classes.forEach(local => {
-          if (local.schoolId === schoolId && !merged.find(c => c.id === local.id)) {
-            merged.push(local);
-          } else if (local.schoolId !== schoolId) {
-            merged.push(local);
-          }
-        });
-        return { classes: merged };
-      });
-        } catch (error: any) {
-          set({ error: error.message || 'Erro ao carregar turmas' });
+          set((state) => {
+            const merged = [...data];
+            state.classes.forEach((local) => {
+              if (
+                local.schoolId === schoolId &&
+                !merged.find((c) => c.id === local.id)
+              ) {
+                merged.push(local);
+              } else if (local.schoolId !== schoolId) {
+                merged.push(local);
+              }
+            });
+            return { classes: merged };
+          });
+        } catch (error) {
+          set({ error: (error as Error).message || 'Erro ao carregar turmas' });
         } finally {
           set({ isLoading: false });
         }
@@ -53,15 +56,15 @@ export const useClassStore = create<ClassState>()(
         set({ isLoading: true });
         try {
           const data = await classRepository.fetchAll();
-      set((state) => {
-        const merged = [...data];
-        state.classes.forEach(local => {
-          if (!merged.find(c => c.id === local.id)) {
-            merged.push(local);
-          }
-        });
-        return { classes: merged };
-      });
+          set((state) => {
+            const merged = [...data];
+            state.classes.forEach((local) => {
+              if (!merged.find((c) => c.id === local.id)) {
+                merged.push(local);
+              }
+            });
+            return { classes: merged };
+          });
         } catch (error) {
           console.error('Failed to fetch all classes', error);
         } finally {
@@ -92,7 +95,7 @@ export const useClassStore = create<ClassState>()(
 
       deleteClass: async (id) => {
         try {
-          const clazz = get().classes.find(c => c.id === id);
+          const clazz = get().classes.find((c) => c.id === id);
           await classRepository.delete(id);
           set((state) => ({
             classes: state.classes.filter((c) => c.id !== id),
@@ -109,15 +112,20 @@ export const useClassStore = create<ClassState>()(
 
       updateStudentCount: (id, increment) => {
         set((state) => ({
-          classes: state.classes.map((c) => 
-            c.id === id ? { ...c, studentsCount: Math.max(0, c.studentsCount + increment) } : c
-          )
+          classes: state.classes.map((c) =>
+            c.id === id
+              ? {
+                  ...c,
+                  studentsCount: Math.max(0, c.studentsCount + increment),
+                }
+              : c,
+          ),
         }));
       },
     }),
     {
       name: 'prefeduca-classes',
       storage: createJSONStorage(() => AsyncStorage),
-    }
-  )
+    },
+  ),
 );

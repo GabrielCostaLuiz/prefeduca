@@ -17,7 +17,14 @@ interface SchoolCardProps {
   onDelete: () => void;
 }
 
-export function SchoolCard({ name, address, classCount, onPress, onEdit, onDelete }: SchoolCardProps) {
+export function SchoolCard({
+  name,
+  address,
+  classCount,
+  onPress,
+  onEdit,
+  onDelete,
+}: SchoolCardProps) {
   return (
     <Box className="p-5 bg-white rounded-2xl shadow-soft-1 border border-outline-50">
       <HStack className="justify-between items-center">
@@ -32,8 +39,14 @@ export function SchoolCard({ name, address, classCount, onPress, onEdit, onDelet
           </VStack>
         </Pressable>
         <HStack space="md" className="items-center">
-          <Badge action="info" variant="solid" className="rounded-full px-3 py-1 ">
-            <BadgeText className=" text-xs font-bold leading-tight">{classCount} Turmas</BadgeText>
+          <Badge
+            action="info"
+            variant="solid"
+            className="rounded-full px-3 py-1 "
+          >
+            <BadgeText className=" text-xs font-bold leading-tight">
+              {classCount} Turmas
+            </BadgeText>
           </Badge>
           <MenuOptions
             offset={4}
@@ -45,15 +58,15 @@ export function SchoolCard({ name, address, classCount, onPress, onEdit, onDelet
                 key: 'edit',
                 title: 'Editar Unidade',
                 action: onEdit,
-                icon: Edit2
+                icon: Edit2,
               },
               {
                 key: 'delete',
                 title: 'Excluir Unidade',
                 action: onDelete,
                 icon: Trash2,
-                isDestructive: true
-              }
+                isDestructive: true,
+              },
             ]}
           />
         </HStack>
