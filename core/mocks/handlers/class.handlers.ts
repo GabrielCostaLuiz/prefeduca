@@ -53,7 +53,14 @@ export const classHandlers = [
       recalculateStudentCounts();
       return HttpResponse.json(responseBody);
     }
-    return new HttpResponse(null, { status: 404 });
+    
+    const newClass = { ...updatedData, id, studentsCount: updatedData.studentsCount || 0 };
+    db.classes.push(newClass as any);
+    const school = db.schools.find((s) => s.id === newClass.schoolId);
+    const responseBody = { ...newClass, schoolName: school?.name };
+    recalculateClassCounts();
+    recalculateStudentCounts();
+    return HttpResponse.json(responseBody);
   }),
 
   http.delete(`${API_URL}/classes/:id`, ({ params }) => {

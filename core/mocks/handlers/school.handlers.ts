@@ -29,7 +29,11 @@ export const schoolHandlers = [
       recalculateClassCounts();
       return HttpResponse.json(db.schools[index]);
     }
-    return new HttpResponse(null, { status: 404 });
+    
+    const newSchool = { ...body, id, classCount: 0 };
+    db.schools.push(newSchool);
+    recalculateClassCounts();
+    return HttpResponse.json(newSchool);
   }),
 
   http.get(`${API_URL}/schools/:id`, ({ params }) => {

@@ -46,7 +46,12 @@ export const studentHandlers = [
       recalculateStudentCounts();
       return HttpResponse.json(db.students[index]);
     }
-    return new HttpResponse(null, { status: 404 });
+    
+    // UPSERT: Create if doesn't exist (Sync from offline storage)
+    const newStudent = { ...body, id };
+    db.students.push(newStudent);
+    recalculateStudentCounts();
+    return HttpResponse.json(newStudent);
   }),
 
   http.delete(`${API_URL}/students/:id`, ({ params }) => {

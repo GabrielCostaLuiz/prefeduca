@@ -52,7 +52,7 @@ export function ClassListScreen() {
     updateClass,
     deleteClass,
   } = useClassStore();
-  const { schools, fetchSchools } = useSchoolStore();
+  const { schools: allSchools, fetchSchools: fetchAllSchoolsData } = useSchoolStore();
   const { students } = useStudentStore();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -64,8 +64,8 @@ export function ClassListScreen() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    fetchSchools();
-  }, [fetchSchools]);
+    fetchAllSchoolsData();
+  }, [fetchAllSchoolsData]);
 
   useFocusEffect(
     useCallback(() => {
@@ -173,7 +173,7 @@ export function ClassListScreen() {
                   value={
                     selectedSchoolId === 'all'
                       ? 'Todas Unidades'
-                      : schools.find((s) => s.id === selectedSchoolId)?.name
+                      : allSchools.find((s) => s.id === selectedSchoolId)?.name
                   }
                 />
                 <SelectIcon
@@ -188,7 +188,7 @@ export function ClassListScreen() {
                     <SelectDragIndicator />
                   </SelectDragIndicatorWrapper>
                   <SelectItem label="Todas Unidades" value="all" />
-                  {schools.map((school) => (
+                  {allSchools.map((school) => (
                     <SelectItem
                       key={school.id}
                       label={school.name}

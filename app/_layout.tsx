@@ -7,6 +7,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
 import { Stack } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSchoolStore } from '@/features/schools/school.store';
+import { useClassStore } from '@/features/classes/class.store';
+import { useStudentStore } from '@/features/students/student.store';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -80,6 +83,27 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const fetchSchools = useSchoolStore((s) => s.fetchSchools);
+  const fetchAllClasses = useClassStore((s) => s.fetchAllClasses);
+  const fetchAllStudents = useStudentStore((s) => s.fetchAllStudents);
+
+  useEffect(() => {
+    const initData = async () => {
+      try {
+        await Promise.all([
+          fetchSchools(),
+          fetchAllClasses(),
+          fetchAllStudents(),
+        ]);
+        console.log('[App] Data initialized successfully');
+      } catch (error) {
+        console.error('[App] Failed to initialize data:', error);
+      }
+    };
+
+    initData();
+  }, [fetchSchools, fetchAllClasses, fetchAllStudents]);
+
   const LightTheme = {
     ...DefaultTheme,
     colors: {

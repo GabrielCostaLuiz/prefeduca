@@ -3,6 +3,7 @@ import { Student, CreateStudentDTO } from './student.types';
 
 export interface StudentRepository {
   fetchByClass(classId: string): Promise<Student[]>;
+  fetchAll(): Promise<Student[]>;
   create(classId: string, data: CreateStudentDTO): Promise<Student>;
   delete(id: string): Promise<void>;
   update(id: string, name: string): Promise<Student>;
@@ -13,6 +14,10 @@ export class HttpStudentRepository implements StudentRepository {
 
   async fetchByClass(classId: string): Promise<Student[]> {
     return await this.client.get<Student[]>(`/classes/${classId}/students`);
+  }
+
+  async fetchAll(): Promise<Student[]> {
+    return await this.client.get<Student[]>('/students');
   }
 
   async create(classId: string, data: CreateStudentDTO): Promise<Student> {

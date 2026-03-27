@@ -12,6 +12,7 @@ interface StudentState {
   isLoading: boolean;
   error: string | null;
   fetchStudents: (classId: string) => Promise<void>;
+  fetchAllStudents: () => Promise<void>;
   addStudent: (classId: string, name: string) => Promise<void>;
   deleteStudent: (id: string) => Promise<void>;
   updateStudent: (id: string, name: string) => Promise<void>;
@@ -28,17 +29,40 @@ export const useStudentStore = create<StudentState>()(
         set({ isLoading: true, error: null });
         try {
           const data = await studentRepository.fetchByClass(classId);
-      set((state) => {
-        const merged = [...data];
-        state.students.forEach(local => {
-          if (local.classId === classId && !merged.find(s => s.id === local.id)) {
-            merged.push(local);
-          } else if (local.classId !== classId) {
-            merged.push(local);
-          }
-        });
-        return { students: merged };
-      });
+          set((state) => {
+            const merged = [...data];
+            state.students.forEach((local) => {
+              if (
+                local.classId === classId &&
+                !merged.find((s) => s.id === local.id)
+              ) {
+                merged.push(local);
+              } else if (local.classId !== classId) {
+                merged.push(local);
+              }
+            });
+            return { students: merged };
+          });
+        } catch (error: unknown) {
+          set({ error: (error as Error).message || 'Erro ao carregar alunos' });
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+
+      fetchAllStudents: async () => {
+        set({ isLoading: true, error: null });
+        try {
+          const data = await studentRepository.fetchAll();
+          set((state) => {
+            const merged = [...data];
+            state.students.forEach((local) => {
+              if (!merged.find((s) => s.id === local.id)) {
+                merged.push(local);
+              }
+            });
+            return { students: merged };
+          });
         } catch (error: unknown) {
           set({ error: (error as Error).message || 'Erro ao carregar alunos' });
         } finally {

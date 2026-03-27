@@ -32,9 +32,7 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { HStack } from '@/components/ui/hstack';
-import { ChevronDownIcon, SortAscIcon } from 'lucide-react-native';
-import { Heading } from '@/components/ui/heading';
-import { Text } from '@/components/ui/text';
+import { SortAscIcon } from 'lucide-react-native';
 import { VStack } from '@/components/ui/vstack';
 
 export type SortOrder =
