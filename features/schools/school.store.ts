@@ -29,7 +29,19 @@ export const useSchoolStore = create<SchoolState>()(
     set({ isLoading: true, error: null });
     try {
       const data = await schoolRepository.fetchAll();
-      set({ schools: data });
+      set((state) => {
+        const localSchools = state.schools;
+        const serverSchools = data;
+        
+        const merged = [...serverSchools];
+        localSchools.forEach(local => {
+          if (!merged.find(s => s.id === local.id)) {
+            merged.push(local);
+          }
+        });
+
+        return { schools: merged };
+      });
     } catch (error: any) {
       set({ error: error.message || 'Erro ao carregar escolas' });
     } finally {

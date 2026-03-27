@@ -1,11 +1,9 @@
-import React from 'react';
 import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { HStack } from '@/components/ui/hstack';
 import { VStack } from '@/components/ui/vstack';
-import { Pressable } from 'react-native';
-import { MoreVertical, Edit2, Trash2 } from 'lucide-react-native';
+import { Edit2, Trash2 } from 'lucide-react-native';
 import { Student } from '../student.types';
 import { MenuOptions } from '@/components/shared/MenuOptions';
 

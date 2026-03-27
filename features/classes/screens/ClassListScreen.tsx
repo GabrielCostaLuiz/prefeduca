@@ -1,9 +1,7 @@
 import { Box } from '@/components/ui/box';
-import { Heading } from '@/components/ui/heading';
-import { Text } from '@/components/ui/text';
 import { useClassStore } from '../class.store';
 import { Class } from '../class.types';
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { FlatList, ActivityIndicator, RefreshControl, Alert } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { PlusIcon, UsersIcon } from 'lucide-react-native';

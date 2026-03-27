@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@/components/ui/box';
 import { Student } from '../student.types';
 import { StudentCard } from './StudentCard';

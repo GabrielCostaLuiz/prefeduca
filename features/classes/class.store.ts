@@ -31,7 +31,17 @@ export const useClassStore = create<ClassState>()(
         set({ isLoading: true, error: null });
         try {
           const data = await classRepository.fetchBySchool(schoolId);
-          set({ classes: data });
+      set((state) => {
+        const merged = [...data];
+        state.classes.forEach(local => {
+          if (local.schoolId === schoolId && !merged.find(c => c.id === local.id)) {
+            merged.push(local);
+          } else if (local.schoolId !== schoolId) {
+            merged.push(local);
+          }
+        });
+        return { classes: merged };
+      });
         } catch (error: any) {
           set({ error: error.message || 'Erro ao carregar turmas' });
         } finally {
@@ -43,7 +53,15 @@ export const useClassStore = create<ClassState>()(
         set({ isLoading: true });
         try {
           const data = await classRepository.fetchAll();
-          set({ classes: data });
+      set((state) => {
+        const merged = [...data];
+        state.classes.forEach(local => {
+          if (!merged.find(c => c.id === local.id)) {
+            merged.push(local);
+          }
+        });
+        return { classes: merged };
+      });
         } catch (error) {
           console.error('Failed to fetch all classes', error);
         } finally {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@/components/ui/box';
 import { Input, InputField, InputIcon, InputSlot } from '@/components/ui/input';
 import { SearchIcon } from 'lucide-react-native';

@@ -28,7 +28,17 @@ export const useStudentStore = create<StudentState>()(
         set({ isLoading: true, error: null });
         try {
           const data = await studentRepository.fetchByClass(classId);
-          set({ students: data });
+      set((state) => {
+        const merged = [...data];
+        state.students.forEach(local => {
+          if (local.classId === classId && !merged.find(s => s.id === local.id)) {
+            merged.push(local);
+          } else if (local.classId !== classId) {
+            merged.push(local);
+          }
+        });
+        return { students: merged };
+      });
         } catch (error: any) {
           set({ error: error.message || 'Erro ao carregar alunos' });
         } finally {

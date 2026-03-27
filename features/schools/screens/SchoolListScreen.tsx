@@ -4,7 +4,7 @@ import { School } from '../school.types';
 import { SchoolCard } from '../components/SchoolCard';
 import { SchoolForm } from '../components/SchoolForm';
 import { router } from 'expo-router';
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { FlatList, ActivityIndicator, RefreshControl, Alert } from 'react-native';
 import { PlusIcon, MapIcon } from 'lucide-react-native';
 import Container from '@/components/layout/Container';

@@ -1,9 +1,7 @@
-import { Box } from '@/components/ui/box';
 import { Button, ButtonText, ButtonSpinner } from '@/components/ui/button';
 import { FormControl, FormControlLabel, FormControlLabelText, FormControlError, FormControlErrorText } from '@/components/ui/form-control';
 import { Input,  InputField } from '@/components/ui/input';
 import { VStack } from '@/components/ui/vstack';
-import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -84,7 +82,7 @@ export function SchoolForm({ initialData, onSubmit, isSubmitting }: SchoolFormPr
         className="bg-primary-0 mt-4 h-12 rounded-xl"
       >
         {isSubmitting ? (
-          <ButtonSpinner color="#fff" />
+          <ButtonSpinner />
         ) : (
           <ButtonText className="font-bold text-lg">Salvar Escola</ButtonText>
         )}

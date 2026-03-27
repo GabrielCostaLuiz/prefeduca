@@ -3,7 +3,6 @@ import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { HStack } from '@/components/ui/hstack';
 import { Badge, BadgeText } from '@/components/ui/badge';
-import React from 'react';
 import { Pressable } from 'react-native';
 import { Edit2, Trash2 } from 'lucide-react-native';
 import { VStack } from '@/components/ui/vstack';

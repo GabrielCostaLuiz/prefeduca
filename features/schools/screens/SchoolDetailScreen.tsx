@@ -3,8 +3,7 @@ import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { Button, ButtonText, ButtonIcon } from '@/components/ui/button';
 import { HStack } from '@/components/ui/hstack';
-import { Menu, MenuItem, MenuItemLabel } from '@/components/ui/menu';
-import { School, CreateSchoolDTO } from '../school.types';
+import {  CreateSchoolDTO } from '../school.types';
 import { useSchoolStore } from '../school.store';
 import { SchoolForm } from '../components/SchoolForm';
 import { useClassStore } from '../../classes/class.store';
@@ -12,14 +11,13 @@ import { ClassForm } from '../../classes/components/ClassForm';
 import { ClassCard } from '../../classes/components/ClassCard';
 import { Class, CreateClassDTO } from '../../classes/class.types';
 import { useLocalSearchParams, router } from 'expo-router';
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {  ActivityIndicator, Alert, Pressable, RefreshControl, FlatList } from 'react-native';
-import { MoreVertical, Plus, Users, Edit2, Trash2 } from 'lucide-react-native';
+import {  Plus, Users, Edit2, Trash2 } from 'lucide-react-native';
 import Container from '@/components/layout/Container';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { SearchInput } from '@/components/shared/SearchInput';
 import { AppModal } from '@/components/shared/AppModal';
-import { MenuOptions } from '@/components/shared/MenuOptions';
 import { DetailHeader } from '@/components/shared/DetailHeader';
 
 export function SchoolDetailScreen() {

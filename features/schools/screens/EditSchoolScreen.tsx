@@ -2,7 +2,7 @@ import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { SchoolForm } from '../components/SchoolForm';
 import { useLocalSearchParams, router } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
 import { useSchoolStore } from '../school.store';
 

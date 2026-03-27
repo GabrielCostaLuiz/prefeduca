@@ -2,7 +2,7 @@ import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { ClassForm } from '../components/ClassForm';
 import { useLocalSearchParams, router } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useClassStore } from '../class.store';
 

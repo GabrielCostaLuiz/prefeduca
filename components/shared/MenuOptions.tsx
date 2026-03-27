@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pressable } from 'react-native';
 import { MoreVertical } from 'lucide-react-native';
 import { Menu, MenuItem, MenuItemLabel } from '@/components/ui/menu';
