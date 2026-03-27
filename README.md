@@ -187,5 +187,9 @@ O app utiliza **Gluestack UI v2** e **NativeWind**, seguindo uma paleta de cores
 ## Screenshots
 
 <div align="center">
-  <p><i>Imagens demonstrativas do ambiente educacional (Escolas, Turmas e Lista de Alunos)</i></p>
+  <img src="./assets/screenshots/screen1.jpeg" width="22%" />
+  <img src="./assets/screenshots/screen2.jpeg" width="22%" />
+  <img src="./assets/screenshots/screen3.jpeg" width="22%" />
+  <img src="./assets/screenshots/screen4.jpeg" width="22%" />
+  <p><i>Fluxo de Escolas, Detalhes da Unidade, Listagem de Turmas e Cadastro de Alunos</i></p>
 </div>
