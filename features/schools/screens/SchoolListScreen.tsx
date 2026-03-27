@@ -7,7 +7,7 @@ import { router } from 'expo-router';
 import React, { useEffect, useState, useMemo } from 'react';
 import { FlatList, ActivityIndicator, RefreshControl, Alert } from 'react-native';
 import { PlusIcon, MapIcon } from 'lucide-react-native';
-import Container from '@/components/layout/container';
+import Container from '@/components/layout/Container';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { ErrorState } from '@/components/shared/ErrorState';
 import { SearchInput } from '@/components/shared/SearchInput';

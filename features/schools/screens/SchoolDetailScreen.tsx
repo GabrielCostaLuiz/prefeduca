@@ -15,7 +15,7 @@ import { useLocalSearchParams, router } from 'expo-router';
 import React, { useEffect, useState, useMemo } from 'react';
 import {  ActivityIndicator, Alert, Pressable, RefreshControl, FlatList } from 'react-native';
 import { MoreVertical, Plus, Users, Edit2, Trash2 } from 'lucide-react-native';
-import Container from '@/components/layout/container';
+import Container from '@/components/layout/Container';
 import { EmptyState } from '@/components/shared/EmptyState';
 import { SearchInput } from '@/components/shared/SearchInput';
 import { AppModal } from '@/components/shared/AppModal';

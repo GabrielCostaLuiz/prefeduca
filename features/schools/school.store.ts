@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { School, CreateSchoolDTO, UpdateSchoolDTO } from './school.types';
 import { makeSchoolRepository } from './school.factory';
 
@@ -16,7 +18,9 @@ interface SchoolState {
   updateClassCount: (id: string, increment: number) => void;
 }
 
-export const useSchoolStore = create<SchoolState>((set, get) => ({
+export const useSchoolStore = create<SchoolState>()(
+  persist(
+    (set, get) => ({
   schools: [],
   isLoading: false,
   error: null,
@@ -73,4 +77,7 @@ export const useSchoolStore = create<SchoolState>((set, get) => ({
       )
     }));
   },
+}), {
+  name: 'prefeduca-schools',
+  storage: createJSONStorage(() => AsyncStorage),
 }));

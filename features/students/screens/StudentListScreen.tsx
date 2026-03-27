@@ -15,7 +15,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { ScrollView, ActivityIndicator, Alert, Pressable, RefreshControl, FlatList } from 'react-native';
 import { MoreVertical, Plus, Edit2, Trash2, Users2 } from 'lucide-react-native';
 import { ClassForm } from '../../classes/components/ClassForm';
-import Container from '@/components/layout/container';
+import Container from '@/components/layout/Container';
 import { FormControl, FormControlLabel, FormControlLabelText } from '@/components/ui/form-control';
 import { SearchInput } from '@/components/shared/SearchInput';
 import { AppModal } from '@/components/shared/AppModal';
